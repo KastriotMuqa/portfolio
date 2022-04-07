@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Web.BE.Model.Trainings;
+using Web.BE.Services;
 
 namespace Web.BE.Controllers
 {
@@ -8,19 +9,22 @@ namespace Web.BE.Controllers
     [ApiController]
     public class TrainingController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult GetTrainings()
+        private readonly TrainingService _trainingService;
+        public TrainingController(TrainingService trainingService)
         {
-            var trainings = new List<Training>();
-            trainings.Add(new Training()
-            {
-                Description = "Test",
-                IssuedDate = DateTime.Now,
-                Issuer = "UBT",
-                Title = "Test",
+            _trainingService = trainingService;
+        }
 
-            });
-            return Ok(trainings);
+
+        [HttpGet]
+        public async Task<ActionResult<List<Model.Trainings.Training>>> GetTrainings()
+        {
+            var trainings = await _trainingService.GetTrainingsAsync();
+            if (trainings != null)
+                return Ok(trainings);
+
+            return NotFound("No trainings were found");
         }
     }
 }
+
