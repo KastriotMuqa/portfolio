@@ -12,9 +12,14 @@ namespace Web.BE.Repository
             _context = context;
         }
 
-        public async Task<List<Model.Entities.Training>> GetTrainingAsync()
+        public async Task<List<Model.Entities.Training>> GetTrainingsAsync()
         {
             return await _context.Trainings.ToListAsync();
+        }
+
+        public async Task<Model.Entities.Training> GetTrainingAsync(int id)
+        {
+            return await _context.Trainings.FindAsync(id);
         }
     }
 }

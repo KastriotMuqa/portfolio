@@ -55,9 +55,11 @@
                 <h5>Datacamp</h5>
             </div>
             <div class="box">
+                <a href="./pages/article.html">
                 <h6>January 2021 - July 2021</h6>
                 <h4>Traning:Cyber Unity-Advanced Security Program</h4>
                 <h5>ICK</h5>
+            </a>
             </div>
         </div>
     </section>
@@ -86,9 +88,17 @@
 
     <script async>
 
-        function createMenuItem(h6, h4, h5) {
+        function createMenuItem(h6, h4, h5, id) {
             var innerDiv = document.createElement("div");
             innerDiv.classList.add("box");
+            innerDiv.setAttribute("id", id);
+
+            var aLink = document.createElement('a');
+            aLink.title = "temp"
+            aLink.href =`./pages/article.html?id=${id}`
+    
+            innerDiv.appendChild(aLink)
+
 
             var h6element = document.createElement('h6');
             h6element.innerText += `${h6}`;
@@ -99,15 +109,17 @@
             var h5element = document.createElement('h5');
             h5element.innerText += `${h5}`
     
-            innerDiv.appendChild(h6element);
+            aLink.appendChild(h6element);
             innerDiv.appendChild(h4element);
             innerDiv.appendChild(h5element);
-    
+
+            
+
             return innerDiv;
         }
     
         async function fetchData() {
-            var url = 'https://localhost:7085/api/training';
+            var url = 'https://localhost:7085/api/trainings';
             var data = await fetch(url);
             return await data.json();
         }
@@ -121,8 +133,8 @@
             for(var i=0;i<data.length;i++) {
                 console.log(data[i])
 
-                var {title, issuer, issuedDate} = data[i];
-                theDiv.appendChild(createMenuItem(title, issuer, issuedDate));
+                var {title, issuer, issuedDate, id} = data[i];
+                theDiv.appendChild(createMenuItem(title, issuer, issuedDate, id));
             }
         }
 

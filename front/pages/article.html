@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="./article.css" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Portfo<span>lio</span></a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+
+        <ul class="navbar">
+            <li><a href="#home">Home</a></li>
+            
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+         </ul>
+    </header>
+
+
+
+    <div class="main-div">
+        <h1 class="main-title">Title</h1>
+        <div class="image-div">
+            <img src="https://www.eschoolnews.com/files/2021/02/coding-platform-STEM-code.jpg" alt="" width="760px" height="400px" id="img-src">
+        </div>
+        <div class="text-div">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Ipsam incidunt enim quod ducimus fugiat unde pariatur laudantium ut
+            officia molestiae delectus, necessitatibus facere temporibus vel, similique quas tempora repellat. Quos.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos dolorem, culpa quasi eaque reiciendis quod 
+            voluptatem enim at magnam natus aut facilis aspernatur 
+            nostrum ex minus unde doloremque, temporibus totam.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto laboriosam commodi molestias quasi fugiat amet eius odio porro ad alias 
+            fuga beatae tenetur autem, nihil culpa similique asperiores 
+            minima repudiandae.
+        </div>
+
+        <h1 class="main-issuer">Issuer: &nbsp; </h1>
+        <h3 class="main-date">Date: &nbsp;</h3>
+    </div>
+
+
+    <section class="contact" id="contact">
+        <div class="max-width">
+            <h2 class="title">Contact me</h2>
+             </div>
+    </section>
+    <section>
+        <div class="box">
+        <h3>Email</h3>
+        <p>kastriotmuqa45@gmail.com</p></div>
+            <div class="box">
+        <h3>Phone</h3>
+        <p>+38349524040</p></div>
+    </section>
+
+
+    <script>
+
+    function setMenuItem(title, issuer, date, description, imgSource) {
+
+            console.log(title, issuer, date, description)
+
+            var titleElement = document.querySelector('.main-title');
+            titleElement.innerText = title;
+
+            var issuerElement = document.querySelector('.main-issuer');
+            issuerElement.innerText += issuer;
+
+            var dateElement = document.querySelector('.main-date');
+            dateElement.innerText += date;
+
+            var descriptionElement = document.querySelector('.text-div');
+            descriptionElement.innerText = description;
+
+            var imgSourceElement = document.querySelector('#img-src');
+            imgSourceElement.src = imgSource
+        }
+
+
+    async function fetchData(id) {
+            var url = `https://localhost:7085/api/trainings/${id}`;
+            var data = await fetch(url);
+            return await data.json();
+        }
+
+        async function createElements()
+        {
+            var url =  window.location.href;
+            var paths = url.split('=');
+
+            var id = parseInt(paths[paths.length - 1]);
+
+            var data = await fetchData(id);
+
+            var {title, issuer, issuedDate, image, description} = data;
+            setMenuItem(title, issuer, issuedDate, description, image);
+        }
+
+        createElements()
+
+    </script>
+
+
+    </body>
+</html>
