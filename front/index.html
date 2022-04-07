@@ -43,7 +43,7 @@
         <div class="center">
             <h3>Education and Training</h3>
         </div>
-        <div class="resume-content">
+        <div class="resume-content" id="resume-content">
             <div class="box">
                 <h6>2017 - Present</h6>
                 <h4>Computer Science and Engineering</h4>
@@ -51,7 +51,7 @@
             </div>
             <div class="box">
                 <h6>January 2022</h6>
-                <h4>Training:SQL Path for Developer</h4>
+                <h4>Training:SQDeveloperL Path for </h4>
                 <h5>Datacamp</h5>
             </div>
             <div class="box">
@@ -61,6 +61,8 @@
             </div>
         </div>
     </section>
+
+    
 
     <section class="contact" id="contact">
         <div class="max-width">
@@ -81,5 +83,51 @@
                 
     </section>--->
     <script src="script.js"></script>
+
+    <script async>
+
+        function createMenuItem(h6, h4, h5) {
+            var innerDiv = document.createElement("div");
+            innerDiv.classList.add("box");
+
+            var h6element = document.createElement('h6');
+            h6element.innerText += `${h6}`;
+            
+            var h4element = document.createElement('h4');
+            h4element.innerText += `${h4}`;
+    
+            var h5element = document.createElement('h5');
+            h5element.innerText += `${h5}`
+    
+            innerDiv.appendChild(h6element);
+            innerDiv.appendChild(h4element);
+            innerDiv.appendChild(h5element);
+    
+            return innerDiv;
+        }
+    
+        async function fetchData() {
+            var url = 'https://localhost:7085/api/training';
+            var data = await fetch(url);
+            return await data.json();
+        }
+
+        async function createElements()
+        {
+            var data = await fetchData();
+
+            var theDiv = document.getElementById("resume-content");
+
+            for(var i=0;i<data.length;i++) {
+                console.log(data[i])
+
+                var {title, issuer, issuedDate} = data[i];
+                theDiv.appendChild(createMenuItem(title, issuer, issuedDate));
+            }
+        }
+
+        createElements();
+
+    </script>
 </body>
 </html>
