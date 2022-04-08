@@ -27,5 +27,16 @@ namespace Web.BE.Services
             var trainingDto = _mapper.Map<Model.Trainings.TrainingDto>(training);
             return trainingDto;
         }
+
+        public async Task<Model.Trainings.TrainingDto?> CreateTrainingAsync(Model.Trainings.TrainingDto training)
+        {
+            if (training == null && training?.Title == null && training?.Issuer == null) return null;
+
+            var trainingEntity = _mapper.Map<Model.Entities.Training>(training);
+            await _repository.AddTrainingAsync(trainingEntity);
+            await _repository.SaveChangesAsync();
+
+            return _mapper.Map<Model.Trainings.TrainingDto>(trainingEntity);
+        }
     }
 }

@@ -40,6 +40,18 @@ namespace Web.BE.Controllers
 
             return NotFound("No trainings was found");
         }
+
+        [HttpPost("trainings")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<Model.Trainings.TrainingDto>> CreateTraining([FromForm]TrainingDto training)
+        {
+            var trainingDto = await _trainingService.CreateTrainingAsync(training);
+            if (trainingDto !=null)
+                return CreatedAtAction(nameof(GetTraining), new { id = training.Id }, training);
+
+            return BadRequest("Bad request");
+        }
     }
 }
 

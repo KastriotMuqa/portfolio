@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="./add-article.css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Portfo<span>lio</span></a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+
+        <ul class="navbar">
+            <li><a href="#home">Home</a></li>
+            
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+         </ul>
+    </header>
+
+    <div class="add-article-div">
+        <form action="https://localhost:7085/api/trainings" method="post" onsubmit="e=>  console.log(e)">
+          <label for="title">Title</label>
+          <br>
+          <input type="text" id="title" name="title" placeholder="Title..">
+            <br>
+          <label for="issuer">Issuer</label>
+          <br>
+          <input type="text" id="issuer" name="issuer" placeholder="Issuer..">
+          <br>
+          <label for="issuedDate">Date</label>
+          <br>
+          <input type="date" id="issuedDate" name="issuedDate" placeholder="Date..">
+          <br>
+          <label for="description">Description</label>
+          <br>
+          <input type="text" id="description" name="description" placeholder="Description..">
+          <br>
+          <input type="submit" value="Submit" onsubmit="e=> console.log(e)" >
+        </form>
+      </div>
+
+   
+    <section class="contact" id="contact">
+        <div class="max-width">
+            <h2 class="title">Contact me</h2>
+             </div>
+    </section>
+    <section>
+        <div class="box">
+        <h3>Email</h3>
+        <p>kastriotmuqa45@gmail.com</p></div>
+            <div class="box">
+        <h3>Phone</h3>
+        <p>+38349524040</p></div>
+
+
+    <script>
+        function preventDefault(e){
+            e = e || window.event;
+            e.preventDefault();
+            return false;
+    }
+    </script>
+
+
+    </body>
+</html>

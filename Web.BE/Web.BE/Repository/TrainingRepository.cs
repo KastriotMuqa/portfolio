@@ -21,5 +21,16 @@ namespace Web.BE.Repository
         {
             return await _context.Trainings.FindAsync(id);
         }
+
+        public async Task AddTrainingAsync(Model.Entities.Training training)
+        {
+            await  _context.Trainings.AddAsync(training);
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            var result = await _context.SaveChangesAsync();
+            return result > 0;
+        }
     }
 }

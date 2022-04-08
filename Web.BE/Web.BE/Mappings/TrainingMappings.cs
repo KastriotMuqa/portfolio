@@ -6,7 +6,7 @@ namespace Web.BE.Mappings
     {
         public TrainingMappings()
         {
-            _ = CreateMap<Model.Entities.Training, Model.Trainings.TrainingDto>();
+            _ = CreateMap<Model.Entities.Training, Model.Trainings.TrainingDto>().ReverseMap();
         }
     }
 }
